@@ -224,6 +224,27 @@ python3 4split_sync.py \
 2. **Metadata reading**: Falls back to file creation time from video metadata
 3. **Offset calculation**: Computes relative offsets based on reference video
 
+### ⚠️ Auto-Sync Limitations
+
+자동 싱크가 정확하지 않을 수 있는 경우:
+
+| Issue | Description |
+|-------|-------------|
+| **Missing metadata** | 일부 화면 녹화 앱은 `creation_time` 메타데이터를 저장하지 않음 |
+| **File creation ≠ Recording start** | 파일 생성 시간과 실제 녹화 시작 시간이 다를 수 있음 |
+| **Buffer delay** | 녹화 앱의 버퍼링으로 인해 실제 캡처가 지연될 수 있음 |
+| **Clock sync** | 여러 기기 간 시스템 시간이 동기화되지 않았을 수 있음 |
+
+**권장사항**: 정확한 싱크가 필요한 경우 `--offsets` 옵션으로 수동 지정을 권장합니다.
+
+```bash
+# 영상을 직접 확인 후 오프셋 수동 지정
+python3 4split_sync.py \
+  reference.mp4 video2.mp4 video3.mp4 video4.mp4 \
+  --offsets 0 7 10 10 \
+  -o synced_output.mp4
+```
+
 ### Video Processing
 
 1. **Scaling**: Each video is scaled to fit its quadrant (960x540 for 1080p output)
