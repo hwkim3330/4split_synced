@@ -13,149 +13,147 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
             color: #fff;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 60px;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
         }
 
         h1 {
-            font-size: 3rem;
-            margin-bottom: 16px;
+            font-size: 2.5rem;
             background: linear-gradient(90deg, #00d9ff, #00ff88);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 10px;
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            color: #a0a0a0;
-            margin-bottom: 30px;
+            color: #888;
+            font-size: 1.1rem;
         }
 
-        .grid-demo {
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+
+        @media (max-width: 1000px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Preview Section */
+        .preview-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .preview-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        #previewCanvas {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .video-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4px;
-            max-width: 400px;
-            margin: 0 auto 40px;
-            background: #333;
-            padding: 4px;
-            border-radius: 12px;
+            width: 100%;
+            height: 100%;
         }
 
-        .grid-cell {
-            aspect-ratio: 16/9;
-            background: linear-gradient(45deg, #2a2a4a, #3a3a6a);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            color: #888;
+        .video-cell {
+            position: relative;
+            background: #111;
+            overflow: hidden;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 60px;
+        .video-cell video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 30px;
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+        .video-label {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.7);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
             color: #00d9ff;
         }
 
-        .feature-card p {
-            color: #a0a0a0;
-            line-height: 1.6;
-        }
-
-        .code-section {
-            background: #0d1117;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 40px;
-            overflow-x: auto;
-        }
-
-        .code-section h2 {
-            color: #00ff88;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        pre {
-            font-family: 'Monaco', 'Consolas', monospace;
-            font-size: 0.9rem;
-            line-height: 1.8;
-            color: #e6e6e6;
-        }
-
-        .comment {
-            color: #6a737d;
-        }
-
-        .command {
-            color: #79c0ff;
-        }
-
-        .string {
-            color: #a5d6ff;
-        }
-
-        .buttons {
+        .empty-cell {
             display: flex;
-            gap: 16px;
+            align-items: center;
             justify-content: center;
+            color: #444;
+            font-size: 0.9rem;
+            border: 2px dashed #333;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .empty-cell:hover {
+            border-color: #00d9ff;
+            color: #00d9ff;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 60px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
             border-radius: 8px;
-            text-decoration: none;
+            font-size: 0.95rem;
             font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .btn-primary {
@@ -163,55 +161,263 @@
             color: #000;
         }
 
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,217,255,0.3);
+        }
+
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .use-cases {
-            margin-bottom: 60px;
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(255,255,255,0.15);
         }
 
-        .use-cases h2 {
+        .btn-danger {
+            background: #ff4757;
+            color: #fff;
+        }
+
+        /* Side Panel */
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .panel-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .panel-card h3 {
+            font-size: 1rem;
+            color: #00d9ff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Upload Section */
+        .upload-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .upload-slot {
+            position: relative;
+            aspect-ratio: 16/9;
+            background: rgba(0,0,0,0.3);
+            border: 2px dashed #333;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .upload-slot:hover {
+            border-color: #00d9ff;
+        }
+
+        .upload-slot.has-video {
+            border-style: solid;
+            border-color: #00ff88;
+        }
+
+        .upload-slot input {
+            display: none;
+        }
+
+        .upload-slot .slot-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .upload-slot .slot-label {
+            font-size: 0.7rem;
+            color: #555;
+            margin-top: 4px;
+        }
+
+        .upload-slot.has-video .slot-number,
+        .upload-slot.has-video .slot-label {
+            display: none;
+        }
+
+        .upload-slot .thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-slot .remove-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 20px;
+            height: 20px;
+            background: #ff4757;
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .upload-slot.has-video .remove-btn {
+            display: block;
+        }
+
+        /* Offset Controls */
+        .offset-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .offset-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .offset-item .video-num {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .offset-item input[type="number"] {
+            flex: 1;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 8px 12px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        .offset-item input[type="number"]:focus {
+            outline: none;
+            border-color: #00d9ff;
+        }
+
+        .offset-item .unit {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* Export Settings */
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .setting-row label {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .setting-row select {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: #fff;
+            font-size: 0.85rem;
+        }
+
+        /* Progress */
+        .progress-container {
+            display: none;
+            margin-top: 16px;
+        }
+
+        .progress-container.active {
+            display: block;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .progress-text {
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.8rem;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #888;
         }
 
-        .use-case-grid {
+        /* Info Section */
+        .info-section {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
 
-        .use-case {
-            background: rgba(255, 255, 255, 0.03);
+        .info-card {
+            background: rgba(255,255,255,0.03);
             border-radius: 12px;
             padding: 24px;
-            text-align: center;
         }
 
-        .use-case-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-
-        .use-case h4 {
-            margin-bottom: 8px;
+        .info-card h4 {
             color: #00d9ff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .use-case p {
+        .info-card p {
             color: #888;
             font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         footer {
             text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #666;
+            padding: 40px 0;
+            color: #555;
+            font-size: 0.9rem;
         }
 
         footer a {
@@ -219,18 +425,14 @@
             text-decoration: none;
         }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            .grid-demo {
-                max-width: 300px;
-            }
+        /* Hidden videos for processing */
+        .hidden-videos {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -238,88 +440,537 @@
     <div class="container">
         <header>
             <h1>4-Split Video Sync</h1>
-            <p class="subtitle">타임스탬프 기반 영상 동기화 및 2x2 그리드 합성 도구</p>
-
-            <div class="grid-demo">
-                <div class="grid-cell">Video 1</div>
-                <div class="grid-cell">Video 2</div>
-                <div class="grid-cell">Video 3</div>
-                <div class="grid-cell">Video 4</div>
-            </div>
-
-            <div class="buttons">
-                <a href="https://github.com/hwkim3330/4split_synced" class="btn btn-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    GitHub
-                </a>
-                <a href="https://github.com/hwkim3330/4split_synced/archive/refs/heads/main.zip" class="btn btn-secondary">
-                    Download ZIP
-                </a>
-            </div>
+            <p class="subtitle">Upload 4 videos, sync timestamps, export as single video</p>
         </header>
 
-        <section class="features">
-            <div class="feature-card">
-                <div class="feature-icon">🎬</div>
-                <h3>Auto Sync</h3>
-                <p>파일명 또는 메타데이터의 타임스탬프를 자동으로 감지하여 여러 영상을 정확하게 동기화합니다.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📐</div>
-                <h3>2x2 Grid Layout</h3>
-                <p>4개의 영상을 균등하게 2x2 그리드로 배치하여 한 화면에서 모든 앵글을 확인할 수 있습니다.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎵</div>
-                <h3>Audio Preservation</h3>
-                <p>기준 영상의 오디오 트랙을 유지하여 원본 음질을 그대로 보존합니다.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📁</div>
-                <h3>Multi-format Support</h3>
-                <p>MP4, MOV, WebM 등 다양한 영상 포맷을 지원합니다.</p>
-            </div>
-        </section>
-
-        <section class="code-section">
-            <h2>Quick Start</h2>
-            <pre><span class="comment"># Clone repository</span>
-<span class="command">git clone</span> <span class="string">https://github.com/hwkim3330/4split_synced.git</span>
-<span class="command">cd</span> 4split_synced
-
-<span class="comment"># Auto sync based on filename timestamps</span>
-<span class="command">python3</span> 4split_sync.py video1.mp4 video2.mp4 video3.mp4 video4.mp4 <span class="string">--auto-sync</span> -o output.mp4
-
-<span class="comment"># Manual offsets (in seconds)</span>
-<span class="command">python3</span> 4split_sync.py video1.mp4 video2.mp4 video3.mp4 video4.mp4 <span class="string">--offsets 0 3 1 1</span> -o output.mp4</pre>
-        </section>
-
-        <section class="use-cases">
-            <h2>Use Cases</h2>
-            <div class="use-case-grid">
-                <div class="use-case">
-                    <div class="use-case-icon">📹</div>
-                    <h4>Multi-angle Recording</h4>
-                    <p>동시에 여러 각도로 촬영한 영상을 동기화하여 합성</p>
+        <div class="main-layout">
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <div class="preview-container">
+                    <canvas id="previewCanvas" width="1920" height="1080"></canvas>
                 </div>
-                <div class="use-case">
-                    <div class="use-case-icon">🖥️</div>
-                    <h4>Screen + Camera</h4>
-                    <p>화면 녹화와 카메라 녹화를 동기화하여 튜토리얼 제작</p>
+                <div class="controls">
+                    <button class="btn btn-secondary" id="playBtn" disabled>
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                        </svg>
+                        Play
+                    </button>
+                    <button class="btn btn-secondary" id="pauseBtn" disabled>
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+                        </svg>
+                        Pause
+                    </button>
+                    <button class="btn btn-secondary" id="resetBtn" disabled>
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                        </svg>
+                        Reset
+                    </button>
+                    <button class="btn btn-primary" id="exportBtn" disabled>
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg>
+                        Export Video
+                    </button>
                 </div>
-                <div class="use-case">
-                    <div class="use-case-icon">📱</div>
-                    <h4>Multi-device Sync</h4>
-                    <p>여러 디바이스에서 녹화한 영상을 하나의 화면에 합성</p>
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Processing... 0%</div>
                 </div>
             </div>
-        </section>
+
+            <!-- Side Panel -->
+            <div class="side-panel">
+                <!-- Upload Panel -->
+                <div class="panel-card">
+                    <h3>
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                        </svg>
+                        Upload Videos
+                    </h3>
+                    <div class="upload-grid">
+                        <div class="upload-slot" data-slot="0">
+                            <input type="file" accept="video/*">
+                            <span class="slot-number">1</span>
+                            <span class="slot-label">Top Left</span>
+                            <button class="remove-btn">&times;</button>
+                        </div>
+                        <div class="upload-slot" data-slot="1">
+                            <input type="file" accept="video/*">
+                            <span class="slot-number">2</span>
+                            <span class="slot-label">Top Right</span>
+                            <button class="remove-btn">&times;</button>
+                        </div>
+                        <div class="upload-slot" data-slot="2">
+                            <input type="file" accept="video/*">
+                            <span class="slot-number">3</span>
+                            <span class="slot-label">Bottom Left</span>
+                            <button class="remove-btn">&times;</button>
+                        </div>
+                        <div class="upload-slot" data-slot="3">
+                            <input type="file" accept="video/*">
+                            <span class="slot-number">4</span>
+                            <span class="slot-label">Bottom Right</span>
+                            <button class="remove-btn">&times;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offset Panel -->
+                <div class="panel-card">
+                    <h3>
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                        </svg>
+                        Time Offsets (seconds)
+                    </h3>
+                    <div class="offset-list">
+                        <div class="offset-item">
+                            <span class="video-num">1</span>
+                            <input type="number" id="offset0" value="0" step="0.1" min="0">
+                            <span class="unit">sec</span>
+                        </div>
+                        <div class="offset-item">
+                            <span class="video-num">2</span>
+                            <input type="number" id="offset1" value="0" step="0.1" min="0">
+                            <span class="unit">sec</span>
+                        </div>
+                        <div class="offset-item">
+                            <span class="video-num">3</span>
+                            <input type="number" id="offset2" value="0" step="0.1" min="0">
+                            <span class="unit">sec</span>
+                        </div>
+                        <div class="offset-item">
+                            <span class="video-num">4</span>
+                            <input type="number" id="offset3" value="0" step="0.1" min="0">
+                            <span class="unit">sec</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Settings -->
+                <div class="panel-card">
+                    <h3>
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                        </svg>
+                        Export Settings
+                    </h3>
+                    <div class="setting-row">
+                        <label>Resolution</label>
+                        <select id="resolution">
+                            <option value="1920x1080">1920x1080 (FHD)</option>
+                            <option value="1280x720">1280x720 (HD)</option>
+                            <option value="960x540">960x540 (qHD)</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <label>Quality</label>
+                        <select id="quality">
+                            <option value="8000000">High (8 Mbps)</option>
+                            <option value="5000000" selected>Medium (5 Mbps)</option>
+                            <option value="2500000">Low (2.5 Mbps)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM6 6.883a.5.5 0 0 1 .757-.429l3.528 2.117a.5.5 0 0 1 0 .858l-3.528 2.117a.5.5 0 0 1-.757-.43V6.884z"/>
+                        </svg>
+                        How to Use
+                    </h4>
+                    <p>1. Upload 4 videos by clicking each slot<br>
+                       2. Adjust time offsets to sync videos<br>
+                       3. Preview with Play button<br>
+                       4. Export to download merged video</p>
+                </div>
+                <div class="info-card">
+                    <h4>
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg>
+                        Supported Formats
+                    </h4>
+                    <p>MP4, WebM, MOV, and other browser-supported video formats. For best results, use videos with similar frame rates.</p>
+                </div>
+                <div class="info-card">
+                    <h4>
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                        </svg>
+                        CLI Version
+                    </h4>
+                    <p>For batch processing or higher quality output, use our Python CLI tool. <a href="https://github.com/hwkim3330/4split_synced">View on GitHub</a></p>
+                </div>
+            </div>
+        </div>
 
         <footer>
-            <p>Made by <a href="https://github.com/hwkim3330">hwkim3330</a> | MIT License</p>
+            <p>Made by <a href="https://github.com/hwkim3330">hwkim3330</a> |
+               <a href="https://github.com/hwkim3330/4split_synced">GitHub</a> |
+               MIT License</p>
         </footer>
     </div>
+
+    <!-- Hidden video elements -->
+    <div class="hidden-videos">
+        <video id="video0" muted playsinline></video>
+        <video id="video1" muted playsinline></video>
+        <video id="video2" muted playsinline></video>
+        <video id="video3" muted playsinline></video>
+    </div>
+
+    <script>
+        // State
+        const state = {
+            videos: [null, null, null, null],
+            videoElements: [],
+            offsets: [0, 0, 0, 0],
+            isPlaying: false,
+            animationId: null,
+            mediaRecorder: null,
+            recordedChunks: []
+        };
+
+        // DOM Elements
+        const canvas = document.getElementById('previewCanvas');
+        const ctx = canvas.getContext('2d');
+        const uploadSlots = document.querySelectorAll('.upload-slot');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+
+        // Initialize video elements
+        for (let i = 0; i < 4; i++) {
+            state.videoElements.push(document.getElementById(`video${i}`));
+        }
+
+        // Upload handlers
+        uploadSlots.forEach((slot, index) => {
+            const input = slot.querySelector('input');
+            const removeBtn = slot.querySelector('.remove-btn');
+
+            slot.addEventListener('click', (e) => {
+                if (e.target !== removeBtn) {
+                    input.click();
+                }
+            });
+
+            input.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    loadVideo(index, file);
+                }
+            });
+
+            removeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                removeVideo(index);
+            });
+        });
+
+        function loadVideo(index, file) {
+            const url = URL.createObjectURL(file);
+            const video = state.videoElements[index];
+
+            video.src = url;
+            video.load();
+
+            video.onloadedmetadata = () => {
+                state.videos[index] = {
+                    file: file,
+                    url: url,
+                    duration: video.duration
+                };
+
+                // Update UI
+                const slot = uploadSlots[index];
+                slot.classList.add('has-video');
+
+                // Create thumbnail
+                const existingThumb = slot.querySelector('.thumbnail');
+                if (existingThumb) existingThumb.remove();
+
+                const thumb = document.createElement('video');
+                thumb.className = 'thumbnail';
+                thumb.src = url;
+                thumb.muted = true;
+                slot.insertBefore(thumb, slot.firstChild);
+
+                updateControls();
+                drawFrame();
+            };
+        }
+
+        function removeVideo(index) {
+            if (state.videos[index]) {
+                URL.revokeObjectURL(state.videos[index].url);
+                state.videos[index] = null;
+                state.videoElements[index].src = '';
+
+                const slot = uploadSlots[index];
+                slot.classList.remove('has-video');
+                const thumb = slot.querySelector('.thumbnail');
+                if (thumb) thumb.remove();
+
+                updateControls();
+                drawFrame();
+            }
+        }
+
+        function updateControls() {
+            const hasAllVideos = state.videos.every(v => v !== null);
+            const hasAnyVideo = state.videos.some(v => v !== null);
+
+            playBtn.disabled = !hasAnyVideo;
+            pauseBtn.disabled = !hasAnyVideo;
+            resetBtn.disabled = !hasAnyVideo;
+            exportBtn.disabled = !hasAllVideos;
+        }
+
+        // Offset inputs
+        for (let i = 0; i < 4; i++) {
+            const input = document.getElementById(`offset${i}`);
+            input.addEventListener('change', () => {
+                state.offsets[i] = parseFloat(input.value) || 0;
+            });
+        }
+
+        // Draw frame
+        function drawFrame() {
+            const width = canvas.width;
+            const height = canvas.height;
+            const cellW = width / 2;
+            const cellH = height / 2;
+
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, width, height);
+
+            const positions = [
+                [0, 0],
+                [cellW, 0],
+                [0, cellH],
+                [cellW, cellH]
+            ];
+
+            for (let i = 0; i < 4; i++) {
+                const [x, y] = positions[i];
+                const video = state.videoElements[i];
+
+                if (state.videos[i] && video.readyState >= 2) {
+                    // Draw video maintaining aspect ratio
+                    const vw = video.videoWidth;
+                    const vh = video.videoHeight;
+                    const scale = Math.min(cellW / vw, cellH / vh);
+                    const dw = vw * scale;
+                    const dh = vh * scale;
+                    const dx = x + (cellW - dw) / 2;
+                    const dy = y + (cellH - dh) / 2;
+
+                    ctx.drawImage(video, dx, dy, dw, dh);
+                } else {
+                    // Draw placeholder
+                    ctx.fillStyle = '#111';
+                    ctx.fillRect(x + 2, y + 2, cellW - 4, cellH - 4);
+                    ctx.fillStyle = '#333';
+                    ctx.font = '24px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`Video ${i + 1}`, x + cellW / 2, y + cellH / 2);
+                }
+
+                // Draw label
+                ctx.fillStyle = 'rgba(0, 217, 255, 0.8)';
+                ctx.font = 'bold 14px sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(`${i + 1}`, x + 10, y + 24);
+            }
+        }
+
+        // Playback controls
+        playBtn.addEventListener('click', () => {
+            state.isPlaying = true;
+
+            for (let i = 0; i < 4; i++) {
+                const video = state.videoElements[i];
+                if (state.videos[i]) {
+                    video.currentTime = state.offsets[i];
+                    video.play();
+                }
+            }
+
+            animate();
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            state.isPlaying = false;
+            cancelAnimationFrame(state.animationId);
+
+            for (let i = 0; i < 4; i++) {
+                if (state.videos[i]) {
+                    state.videoElements[i].pause();
+                }
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            state.isPlaying = false;
+            cancelAnimationFrame(state.animationId);
+
+            for (let i = 0; i < 4; i++) {
+                const video = state.videoElements[i];
+                if (state.videos[i]) {
+                    video.pause();
+                    video.currentTime = state.offsets[i];
+                }
+            }
+
+            drawFrame();
+        });
+
+        function animate() {
+            if (!state.isPlaying) return;
+
+            drawFrame();
+            state.animationId = requestAnimationFrame(animate);
+        }
+
+        // Export
+        exportBtn.addEventListener('click', async () => {
+            const resolution = document.getElementById('resolution').value.split('x');
+            const quality = parseInt(document.getElementById('quality').value);
+
+            canvas.width = parseInt(resolution[0]);
+            canvas.height = parseInt(resolution[1]);
+
+            // Reset videos
+            for (let i = 0; i < 4; i++) {
+                const video = state.videoElements[i];
+                video.currentTime = state.offsets[i];
+            }
+
+            // Wait for seek
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Find shortest duration
+            let minDuration = Infinity;
+            for (let i = 0; i < 4; i++) {
+                if (state.videos[i]) {
+                    const effectiveDuration = state.videos[i].duration - state.offsets[i];
+                    minDuration = Math.min(minDuration, effectiveDuration);
+                }
+            }
+
+            progressContainer.classList.add('active');
+            progressFill.style.width = '0%';
+            progressText.textContent = 'Starting export...';
+
+            // Setup MediaRecorder
+            const stream = canvas.captureStream(30);
+
+            // Try to add audio from first video
+            try {
+                const audioCtx = new AudioContext();
+                const source = audioCtx.createMediaElementSource(state.videoElements[0]);
+                const dest = audioCtx.createMediaStreamDestination();
+                source.connect(dest);
+                source.connect(audioCtx.destination);
+                stream.addTrack(dest.stream.getAudioTracks()[0]);
+            } catch (e) {
+                console.log('No audio track added');
+            }
+
+            const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9')
+                ? 'video/webm;codecs=vp9'
+                : 'video/webm';
+
+            state.recordedChunks = [];
+            state.mediaRecorder = new MediaRecorder(stream, {
+                mimeType: mimeType,
+                videoBitsPerSecond: quality
+            });
+
+            state.mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) {
+                    state.recordedChunks.push(e.data);
+                }
+            };
+
+            state.mediaRecorder.onstop = () => {
+                const blob = new Blob(state.recordedChunks, { type: mimeType });
+                const url = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `4split_${Date.now()}.webm`;
+                a.click();
+
+                URL.revokeObjectURL(url);
+                progressContainer.classList.remove('active');
+
+                // Stop videos
+                for (let i = 0; i < 4; i++) {
+                    state.videoElements[i].pause();
+                }
+            };
+
+            state.mediaRecorder.start(100);
+
+            // Play all videos
+            for (let i = 0; i < 4; i++) {
+                state.videoElements[i].play();
+            }
+
+            state.isPlaying = true;
+
+            const startTime = Date.now();
+
+            function recordFrame() {
+                if (!state.isPlaying) return;
+
+                const elapsed = (Date.now() - startTime) / 1000;
+                const progress = Math.min(100, (elapsed / minDuration) * 100);
+
+                progressFill.style.width = `${progress}%`;
+                progressText.textContent = `Exporting... ${Math.round(progress)}%`;
+
+                drawFrame();
+
+                if (elapsed < minDuration) {
+                    requestAnimationFrame(recordFrame);
+                } else {
+                    state.isPlaying = false;
+                    state.mediaRecorder.stop();
+                    progressText.textContent = 'Processing...';
+                }
+            }
+
+            recordFrame();
+        });
+
+        // Initial draw
+        drawFrame();
+    </script>
 </body>
 </html>
