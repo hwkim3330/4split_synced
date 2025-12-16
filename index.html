@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-Split Video Sync Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            max-width: 400px;
+            margin: 0 auto 40px;
+            background: #333;
+            padding: 4px;
+            border-radius: 12px;
+        }
+
+        .grid-cell {
+            aspect-ratio: 16/9;
+            background: linear-gradient(45deg, #2a2a4a, #3a3a6a);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #00d9ff;
+        }
+
+        .feature-card p {
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+
+        .code-section {
+            background: #0d1117;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+
+        .code-section h2 {
+            color: #00ff88;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        pre {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #e6e6e6;
+        }
+
+        .comment {
+            color: #6a737d;
+        }
+
+        .command {
+            color: #79c0ff;
+        }
+
+        .string {
+            color: #a5d6ff;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            color: #000;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .use-cases {
+            margin-bottom: 60px;
+        }
+
+        .use-cases h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .use-case {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .use-case-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .use-case h4 {
+            margin-bottom: 8px;
+            color: #00d9ff;
+        }
+
+        .use-case p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+        }
+
+        footer a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .grid-demo {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>4-Split Video Sync</h1>
+            <p class="subtitle">타임스탬프 기반 영상 동기화 및 2x2 그리드 합성 도구</p>
+
+            <div class="grid-demo">
+                <div class="grid-cell">Video 1</div>
+                <div class="grid-cell">Video 2</div>
+                <div class="grid-cell">Video 3</div>
+                <div class="grid-cell">Video 4</div>
+            </div>
+
+            <div class="buttons">
+                <a href="https://github.com/hwkim3330/4split_synced" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+                <a href="https://github.com/hwkim3330/4split_synced/archive/refs/heads/main.zip" class="btn btn-secondary">
+                    Download ZIP
+                </a>
+            </div>
+        </header>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎬</div>
+                <h3>Auto Sync</h3>
+                <p>파일명 또는 메타데이터의 타임스탬프를 자동으로 감지하여 여러 영상을 정확하게 동기화합니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📐</div>
+                <h3>2x2 Grid Layout</h3>
+                <p>4개의 영상을 균등하게 2x2 그리드로 배치하여 한 화면에서 모든 앵글을 확인할 수 있습니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎵</div>
+                <h3>Audio Preservation</h3>
+                <p>기준 영상의 오디오 트랙을 유지하여 원본 음질을 그대로 보존합니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📁</div>
+                <h3>Multi-format Support</h3>
+                <p>MP4, MOV, WebM 등 다양한 영상 포맷을 지원합니다.</p>
+            </div>
+        </section>
+
+        <section class="code-section">
+            <h2>Quick Start</h2>
+            <pre><span class="comment"># Clone repository</span>
+<span class="command">git clone</span> <span class="string">https://github.com/hwkim3330/4split_synced.git</span>
+<span class="command">cd</span> 4split_synced
+
+<span class="comment"># Auto sync based on filename timestamps</span>
+<span class="command">python3</span> 4split_sync.py video1.mp4 video2.mp4 video3.mp4 video4.mp4 <span class="string">--auto-sync</span> -o output.mp4
+
+<span class="comment"># Manual offsets (in seconds)</span>
+<span class="command">python3</span> 4split_sync.py video1.mp4 video2.mp4 video3.mp4 video4.mp4 <span class="string">--offsets 0 3 1 1</span> -o output.mp4</pre>
+        </section>
+
+        <section class="use-cases">
+            <h2>Use Cases</h2>
+            <div class="use-case-grid">
+                <div class="use-case">
+                    <div class="use-case-icon">📹</div>
+                    <h4>Multi-angle Recording</h4>
+                    <p>동시에 여러 각도로 촬영한 영상을 동기화하여 합성</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🖥️</div>
+                    <h4>Screen + Camera</h4>
+                    <p>화면 녹화와 카메라 녹화를 동기화하여 튜토리얼 제작</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">📱</div>
+                    <h4>Multi-device Sync</h4>
+                    <p>여러 디바이스에서 녹화한 영상을 하나의 화면에 합성</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Made by <a href="https://github.com/hwkim3330">hwkim3330</a> | MIT License</p>
+        </footer>
+    </div>
+</body>
+</html>
